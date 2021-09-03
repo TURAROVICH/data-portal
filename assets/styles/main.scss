@@ -1,0 +1,55 @@
+$white:#fff;
+$black:#373737;
+$dark:#000;
+$blue:#69B7FF;
+$gray:#999999;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap');
+
+@mixin h1{
+    font-weight: bold;
+    font-size: 55px;
+    line-height: 105px;
+    color: $white;
+}
+
+@mixin h2{
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 49px;
+    /* identical to box height */
+    color: $black;
+}
+
+@mixin h3{
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 24px;
+    color: $black;
+}
+
+@mixin  h4 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+@mixin  h5 {
+    font-family: Poppins;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height */
+
+
+    color: $dark;
+}
+
+@mixin h6 {
+font-family: Poppins;
+font-weight: bold;
+font-size: 10px;
+line-height: 15px;
+}
