@@ -24,9 +24,9 @@
                         </svg>
 
 
-                       <input placeholder="password" type="password">
+                       <input placeholder="password" :type="type">
 
-                        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg @click="type=='password' ? type='text' : type='password'" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 7C19 7 14.9846 13 10 13C5.01538 13 1 7 1 7C1 7 5.01538 1 10 1C14.9846 1 19 7 19 7Z" stroke="#BEBEBE" stroke-width="2" stroke-miterlimit="10" stroke-linejoin="round"/>
                         <path d="M9.99994 10C11.5293 10 12.7692 8.65685 12.7692 7C12.7692 5.34315 11.5293 4 9.99994 4C8.47054 4 7.23071 5.34315 7.23071 7C7.23071 8.65685 8.47054 10 9.99994 10Z" stroke="#BEBEBE" stroke-width="2" stroke-miterlimit="10" stroke-linejoin="round"/>
                         </svg>
@@ -47,6 +47,9 @@
 <script>
 export default {
     layout:'empty',
+    data:()=>({
+        type:'password'
+    })
 }
 </script>
 
