@@ -49,7 +49,7 @@ export default {
     mounted(){
     const Swiper = require('swiper/swiper-bundle.min.js');
      new Swiper('.swiper', {
-             slidesPerView: 2,
+             slidesPerView: 3,
              loop:true,
             navigation: {
                 nextEl: '.swiper-button-next',
