@@ -17,8 +17,8 @@
 
                 </div>
                 <!-- If we need navigation buttons -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
         <div class="container">
 
@@ -36,7 +36,6 @@
 <script>
 import bottomBar from './bottom-bar.vue'
 import InputSelect from './input.vue'
-// import 'swiper/swiper-bundle.css'
 export default {
     props:['iscurrent'],
     data:()=>({
@@ -50,12 +49,12 @@ export default {
     mounted(){
     const Swiper = require('swiper/swiper-bundle.min.js');
      new Swiper('.swiper', {
-             slidesPerView: 3,
-             spaceBetween: 0,
+             slidesPerView: 2,
+             loop:true,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
-            },
+            }
             });
     },
     methods:{
