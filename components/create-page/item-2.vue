@@ -36,7 +36,7 @@
 <script>
 import bottomBar from './bottom-bar.vue'
 import InputSelect from './input.vue'
-import 'swiper/swiper-bundle.css'
+// import 'swiper/swiper-bundle.css'
 export default {
     props:['iscurrent'],
     data:()=>({
@@ -177,5 +177,59 @@ export default {
  *
  * Released on: August 31, 2021
  */
-
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  width:18px;
+  height: 18px;
+  margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #69B7FF;
+  border-radius: 50%;
+  color: #fff;
+}
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 0.35;
+  cursor: auto;
+  pointer-events: none;
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-family: swiper-icons;
+  text-transform: none !important;
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant: initial;
+  line-height: 1;
+  width: 4.8px;
+  height: 9.6px;
+  font-size: 9px;
+}
+.swiper-button-prev,
+.swiper-rtl .swiper-button-next {
+  left: 10px;
+  right: auto;
+}
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  content: 'prev';
+}
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  right: 10px;
+  left: auto;
+}
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+  content: 'next';
+}
+.swiper-button-lock {
+  display: none;
+}
 </style>
