@@ -10,13 +10,16 @@
                </div>
 
                <div class="inputs">
+                   <div v-if="error" class="error">
+                       не корректные данные
+                   </div>
                    <div class="input">
                         <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.0769 17H3.92308C2.31538 17 1 15.6909 1 14.0909V3.90909C1 2.30909 2.31538 1 3.92308 1H17.0769C18.6846 1 20 2.30909 20 3.90909V14.0909C20 15.6909 18.6846 17 17.0769 17Z" stroke="#BEBEBE" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M1 4.63635L10.2121 10.4545L19.4242 4.63635" stroke="#BEBEBE" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
 
-                       <input placeholder="E-mail" type="email">
+                       <input v-model="email" placeholder="E-mail" type="email">
                    </div>
                     <div class="input">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +27,7 @@
                         </svg>
 
 
-                       <input placeholder="password" :type="type">
+                       <input v-model="password" placeholder="password" :type="type">
 
                         <svg @click="type=='password' ? type='text' : type='password'" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 7C19 7 14.9846 13 10 13C5.01538 13 1 7 1 7C1 7 5.01538 1 10 1C14.9846 1 19 7 19 7Z" stroke="#BEBEBE" stroke-width="2" stroke-miterlimit="10" stroke-linejoin="round"/>
@@ -34,9 +37,9 @@
                    </div>
                    <div class="forgot">Forgot password?</div>
 
-                   <div class="login-btn">
+                   <button @click="checkUser" class="login-btn">
                        <span>Log In</span>
-                   </div>
+                   </button>
                </div>
            </div>
        </div>
@@ -48,14 +51,42 @@
 export default {
     layout:'empty',
     data:()=>({
-        type:'password'
-    })
+        type:'password',
+        email:'',
+        password:'',
+        error:''
+    }),
+    mounted(){
+        this.$axios.get('http://164.90.176.21/Account/Seed').then(()=>{
+            console.log('/Account/Seed');
+        })
+    },
+    methods:{
+        checkUser(){
+            this.$axios.post('http://164.90.176.21/Account/Login',{
+            "email": this.email,
+            "password": this.password
+          }
+          ).then(fetchedData=>{
+            console.log('/Account/Login');
+            this.$router.push('/')
+            this.$store.dispatch('auth/fetchUser',fetchedData)
+          }).catch(err=>{
+              this.error = true
+              setTimeout(()=>this.error = false,2000)
+          })
+        }
+    }
 }
 </script>
 
 
 <style lang="scss" scoped>
 @import '@/assets/styles/main.scss';
+.error{
+    color: $error;
+    transition: all .9s ease;
+}
 .main{
     width: 100%;
     min-height: 100vh;
@@ -121,6 +152,9 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
+            outline: none;
+            border: none;
+            cursor: pointer;
             span{
                 @include h5;
                 color: $white;

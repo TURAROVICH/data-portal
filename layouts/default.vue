@@ -84,6 +84,7 @@ header{
     }
 
     .add-btn{
+        cursor: pointer;
         width: 180px;
         height: 40px;
         background: $blue;

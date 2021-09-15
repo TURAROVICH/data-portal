@@ -14,6 +14,8 @@
                             <div class="text">The Macallan 15 Years old Double Cask Matured 700ml</div>
                         </div>
                     </div>
+                   
+
 
                 </div>
                 <!-- If we need navigation buttons -->
@@ -36,6 +38,7 @@
 <script>
 import bottomBar from './bottom-bar.vue'
 import InputSelect from './input.vue'
+
 export default {
     props:['iscurrent'],
     data:()=>({
@@ -44,17 +47,22 @@ export default {
             id:0,
             name:'The Maccallan',
             type:'None'
-        }]
+        }],
+        swiper:null
     }),
+    beforeMount(){
+        this.swiper =  require('swiper/swiper-bundle.min.js')
+    },
     mounted(){
-    const Swiper = require('swiper/swiper-bundle.min.js');
-     new Swiper('.swiper', {
+        const swiper = this.swiper
+         new swiper('.swiper', {
              slidesPerView: 3,
              loop:true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            }
+
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                }
             });
     },
     methods:{

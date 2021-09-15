@@ -103,6 +103,7 @@ export default {
     border-radius: 10px;
     padding: 8px;display: flex;
     gap: 25px;
+    margin: 0 auto;
 .info{
     max-width: 180px;
     .desc{

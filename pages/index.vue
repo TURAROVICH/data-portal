@@ -62,6 +62,9 @@ export default {
     },
      fill1(){
       return this.active==3 ? 'white' : 'black'
+    },
+    isAuthorized(){
+      return this.$store.getters['auth/user']
     }
   },
   methods:{
@@ -74,6 +77,10 @@ export default {
              if (!event.target.matches('.dropbtn') && this.filter == true) {
                 this.filter = false
               }
+            }
+
+            if(!this.isAuthorized){
+              this.$router.push('/login')
             }
   },
  
@@ -94,7 +101,7 @@ export default {
 }
 
 .cards{
-  margin-top: 17px;
+  margin: 17px auto;
   display: flex;
   flex-direction: column;
   gap: 20px;

@@ -1,7 +1,7 @@
 <template>
     <div class="create">
         <div class="pagination">
-            <div class="pag" :class="{'active-1':id===0}">
+            <div @click="next = 200,id=-1" class="pag" :class="{'active-1':id===0}">
                 <div class="title">Photo</div>
                 <div class="pag-container">
                     <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,7 +10,7 @@
 
                 </div>
             </div>
-            <div class="pag" :class="{'active-1':id===1}">
+            <div @click="next = 200,id=0" class="pag" :class="{'active-1':id===1}">
                 <div class="title">Name</div>
                 <div class="pag-container">
                     <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +20,7 @@
 
                 </div>
             </div>
-            <div class="pag" :class="{'active-1':id===2}">
+            <div @click="next = 200-970,id=1" class="pag" :class="{'active-1':id===2}">
                 <div class="title">Type</div>
                 <div class="pag-container">
                     <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@
 
                 </div>
             </div>
-            <div class="pag" :class="{'active-1':id===3}">
+            <div @click="next = 200-970-970,id=2" class="pag" :class="{'active-1':id===3}">
                 <div class="title">Parameters</div>
                 <div class="pag-container">
                    <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +37,7 @@
                     </svg>
                 </div>
             </div>
-              <div class="pag" :class="{'active-1':id===4}">
+              <div @click="next = 200-970-970-970,id=3" class="pag" :class="{'active-1':id===4}">
                 <div class="title">Connections</div>
                 <div class="pag-container">
                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,30 +48,85 @@
             </div>
         </div>
 
-        <carousel @active-slide="active"/>
+
+
+    <div class="carousel">
+        <div class="carousel-wrapper" :style="{'margin-left':`${next}px`}">
+            <Item1  @toSecondSlide="next-=970"/>
+            <Item2  @toSecondSlide="next-=970" :iscurrent="id"/>
+            <Item3  @toSecondSlide="next-=970" :iscurrent="id"/>
+            <Item4  @toSecondSlide="next-=970" :iscurrent="id"/>
+            <Item5  @toSecondSlide="next-=970" :iscurrent="id"/>
+        </div>
+    </div>
+
+
     </div>
 </template>
 
 <script>
-import carousel from '../components/create-page/carousel.vue'
+import Item1 from '../components/create-page/item-1.vue'
+import Item2 from '../components/create-page/item-2.vue'
+import Item3 from '../components/create-page/item-3.vue'
+import Item4 from '../components/create-page/item-4.vue'
+import Item5 from '../components/create-page/item-5.vue'
 export default {
     data:()=>({
         id:0,
-        fill:'white'
+        fill:'white',
+        next:200,
+        chenged:0
     }),
-    methods:{
-        active(id){
-            this.id = id
+      watch:{
+        next(n,l){
+                this.id +=1
         }
     },
+    computed:{
+         isAuthorized(){
+            return this.$store.getters['auth/user']
+        }
+    },
+    methods:{
+        
+    },
+    mounted(){
+        if(!this.isAuthorized){
+              this.$router.push('/login')
+        }
+
+    },
     components:{
-        carousel
+        Item1,
+        Item2,
+        Item3,
+        Item4,
+        Item5
     }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/main.scss';
+.carousel{
+    width: 100%;
+    background: transparent;
+    margin-top: 25px;
+    overflow: hidden;
+    &-wrapper{
+        width:1200px;
+        display: grid;
+        grid-template-columns: repeat(5,1fr );
+        grid-gap: 100px;
+        transition: all .9s ease;
+    }
+    &-item{
+        width: 900px;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 6px rgba(188, 181, 219, 0.25);
+        border-radius: 20px;
+    }
+}
 .create{
     width: 100%;
     min-height: calc( 100vh - 120px );
@@ -83,6 +138,7 @@ export default {
         align-items: center;
         justify-content: space-between;
         .pag{
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;

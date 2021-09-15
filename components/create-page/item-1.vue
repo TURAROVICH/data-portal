@@ -64,8 +64,7 @@ export default {
         img:URL.createObjectURL(this.$refs.img.files[0]),
         id:this.id,
         parameter:[],
-        type:[],
-        
+        type:[]
         })  
         this.id += 1
         },
@@ -99,6 +98,35 @@ export default {
         result(){
             return this.$store.getters['data/imgs']
         }
+    },
+    mounted(){
+        // this.$axios.post('http://164.90.176.21/Product/CreateProduct',null,{mode:'no-cors',withCredentials: true,credentials: true, origin: 'http://localhost:3000'})
+        //     .then(data=>{
+        //         console.log(data);
+        //     })
+        //     .catch(e=>{
+        //         console.log(e);
+        //     })
+
+
+            fetch('http://164.90.176.21/Product/CreateProduct', {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                mode: 'no-cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                origin:'http://localhost:3000',
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer', // no-referrer, *client
+                body: JSON.stringify({}) // body data type must match "Content-Type" header
+            }).then(data=>{
+                console.log(data);
+            }).catch(err=>{
+                console.log(err);
+            })
     }
 }
 </script>

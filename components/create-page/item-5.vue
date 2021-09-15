@@ -47,7 +47,6 @@ export default {
             return this.names
         },
         isc(){
-            console.log(this.iscurrent);
             return this.iscurrent == 4
         },
         savedimgs(){
